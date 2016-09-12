@@ -10,7 +10,7 @@ module Spree
         end
 
         def index
-          @wishlists = current_api_user.wishlists.page(params[:page]).per(params[:per_page])
+          @wishlists = current_api_user.wishlists.ransack(params[:q]).result.page(params[:page]).per(params[:per_page])
           respond_with(@wishlist)
         end
 
@@ -29,7 +29,7 @@ module Spree
 
         def default
           @wishlist = current_api_user.wishlist
-          respond_with(@wishlist, status: 204)
+          respond_with(@wishlist, status: 200, default_template: :show)
         end
 
         def create

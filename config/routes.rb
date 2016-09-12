@@ -7,7 +7,7 @@ Spree::Core::Engine.add_routes do
     namespace :v1 do
       resources :wishlists
       resources :wished_products, only: [:new, :create, :update, :destroy]
-      get '/wishlist' => 'wishlists#default', as: 'default_wishlist'
+      get 'wishlist' => 'wishlists#default', as: 'default_wishlist'
     end
   end
 
