@@ -3,6 +3,17 @@ module Spree
     module V1
       class WishedProductsController < Spree::Api::BaseController
 
+        def index
+          @wished_products = Spree::WishedProduct.all
+          if params[:wishlist_id]
+            @wished_products = @wished_products.where(wishlist_id: params[:wishlist_id])
+          end
+
+          @wished_products = @wished_products.distinct.page(params[:page]).per(params[:per_page])
+
+          respond_with @wished_products
+        end
+
         def new
         end
 
